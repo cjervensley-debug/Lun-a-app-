@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7e8ef">
+<title>LUNÉA | Cycle & Wellness</title>
+<style>
+:root {
+  --pink:#d96d98;
+  --light:#fff5f8;
+  --purple:#77658f;
+  --text:#352d39;
+  --white:#ffffff;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--light);
+  color:var(--text);
+}
+header {
+  background:linear-gradient(135deg,#f8dce8,#eee4f8);
+  padding:27px 20px;
+  border-radius:0 0 28px 28px;
+}
+.brand { font-size:29px; font-weight:bold; letter-spacing:3px; }
+header p { margin-bottom:0; color:#62536a; }
+main { max-width:650px; margin:auto; padding:16px; }
+.card {
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  margin:14px 0;
+  box-shadow:0 4px 16px #4b28400c;
+}
+h2 { font-size:19px; margin-top:0; }
+h3 { font-size:16px; }
+label { display:block; font-size:14px; margin:12px 0 6px; }
+input,select,textarea {
+  width:100%;
+  padding:12px;
+  border:1px solid #e5d7e1;
+  border-radius:11px;
+  background:#fff;
+  color:var(--text);
+  font-size:16px;
+}
+textarea { min-height:75px; resize:vertical; }
+button {
+  border:0;
+  border-radius:12px;
+  padding:12px 15px;
+  font-size:15px;
+  cursor:pointer;
+}
+.primary { background:var(--pink); color:white; width:100%; margin-top:14px; }
+.secondary { background:#f5e8f0; color:#67455c; }
+nav { display:flex; flex-wrap:wrap; gap:8px; margin:15px 0; }
+nav button { flex:1; min-width:90px; background:#f0e5ef; color:#59445f; }
+nav button.active { background:var(--purple); color:white; }
+.tab { display:none; }
+.tab.active { display:block; }
+.big { font-size:27px; font-weight:bold; color:var(--pink); }
+.muted { color:#786d7b; font-size:13px; line-height:1.5; }
+.pill {
+  display:inline-block; padding:7px 10px; margin:4px;
+  border-radius:20px; background:#f8e7ef; font-size:13px;
+}
+.checks { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.checks label {
+  margin:0; padding:10px; background:#fff5f8;
+  border-radius:10px; display:flex; align-items:center; gap:8px;
+}
+.checks input { width:auto; }
+.entry { padding:12px 0; border-bottom:1px solid #eee3eb; }
+footer { text-align:center; padding:20px; color:#837585; font-size:12px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">LUNÉA 🌸</div>
+  <p>Cycle & Wellness · Pran swen tèt ou, chak jou.</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Bonjou, bèl nanm 💗</h2>
+    <p>Byennèt ou enpòtan. Pran kèk minit pou w suiv kò w ak emosyon w.</p>
+    <p class="muted">LUNÉA se yon zouti pou anrejistre enfòmasyon ou. Li pa ranplase yon pwofesyonèl lasante.</p>
+  </section>
+
+  <nav>
+    <button class="active" data-tab="home">Akèy</button>
+    <button data-tab="cycle">Sik règ</button>
+    <button data-tab="wellness">Byennèt</button>
+    <button data-tab="history">Istwa</button>
+  </nav>
+
+  <section id="home" class="tab active">
+    <div class="card">
+      <h2>🌷 Sik règ mwen</h2>
+      <p class="muted">Antre premye jou dènye règ ou pou jwenn yon estimasyon.</p>
+      <label for="lastPeriod">Premye jou dènye règ la</label>
+      <input type="date" id="lastPeriod">
+      <label for="cycleLength">Longè sik ou an mwayèn (jou)</label>
+      <input type="number" id="cycleLength" min="15" max="60" value="28">
+      <button class="primary" id="saveCycle">Sove enfòmasyon sik mwen</button>
+      <div id="cycleSummary" aria-live="polite"></div>
+    </div>
+
+    <div class="card">
+      <h2>💖 Ti jounal jodi a</h2>
+      <label for="mood">Kijan ou santi w jodi a?</label>
+      <select id="mood">
+        <option value="Byen">Byen 😊</option>
+        <option value="Kalm">Kalm 🌿</option>
+        <option value="Fatige">Fatige 😴</option>
+        <option value="Estrèse">Estrèse 🌧️</option>
+        <option value="Tris">Tris 💗</option>
+      </select>
+      <label for="notes">Nòt pèsonèl (si ou vle)</label>
+      <textarea id="notes" placeholder="Ekri sa ou vle sonje..."></textarea>
+      <button class="primary" id="saveJournal">Sove jounal jodi a</button>
+    </div>
+  </section>
+
+  <section id="cycle" class="tab">
+    <div class="card">
+      <h2>🌸 Anrejistre règ ak sentòm</h2>
+      <label for="entryDate">Dat</label>
+      <input type="date" id="entryDate">
+      <label for="period">Èske w gen règ jodi a?</label>
+      <select id="period">
+        <option value="Non">Non</option>
+        <option value="Wi">Wi</option>
+      </select>
+      <label>Sentòm ou remake</label>
+      <div class="checks">
+        <label><input type="checkbox" name="symptom" value="Kranp"> Kranp</label>
+        <label><input type="checkbox" name="symptom" value="Maltèt"> Maltèt</label>
+        <label><input type="checkbox" name="symptom" value="Fatig"> Fatig</label>
+        <label><input type="checkbox" name="symptom" value="Akne"> Akne</label>
+        <label><input type="checkbox" name="symptom" value="Balonnman"> Balonnman</label>
+        <label><input type="checkbox" name="symptom" value="Chanjman atitid"> Chanjman atitid</label>
+      </div>
+      <label for="flow">Kantite san (si w gen règ)</label>
+      <select id="flow">
+        <option>Pa aplikab</option>
+        <option>Lejè</option>
+        <option>Mwayen</option>
+        <option>Anpil</option>
+      </select>
+      <button class="primary" id="saveSymptoms">Sove sentòm yo</button>
+    </div>
+    <div class="card">
+      <h2>🌼 Konnen kò w</h2>
+      <p>Dat ovilasyon ak pwochen règ se estimasyon sèlman. Sik la ka chanje, epi kalandriye pa yon metòd serye pou anpeche gwosès.</p>
+    </div>
+  </section>
+
+  <section id="wellness" class="tab">
+    <div class="card">
+      <h2>🩺 Tansyon ak batman kè</h2>
+      <p class="muted">Antre valè yon aparèy apwopriye mezire. Telefòn nan pa mezire tansyon poukont li.</p>
+      <label for="readingDate">Dat mezi a</label>
+      <input type="date" id="readingDate">
+      <label for="systolic">Tansyon anwo (sistolik)</label>
+      <input type="number" id="systolic" min="50" max="300" placeholder="Egzanp: 120">
+      <label for="diastolic">Tansyon anba (dyastolik)</label>
+      <input type="number" id="diastolic" min="30" max="200" placeholder="Egzanp: 80">
+      <label for="pulse">Batman kè pa minit (si ou konnen li)</label>
+      <input type="number" id="pulse" min="20" max="250" placeholder="Egzanp: 72">
+      <button class="primary" id="saveVitals">Sove mezi yo</button>
+    </div>
+    <div class="card">
+      <h2>😴 Dòmi ak enèji</h2>
+      <label for="sleepDate">Dat</label>
+      <input type="date" id="sleepDate">
+      <label for="sleep">Konbyen èdtan ou dòmi?</label>
+      <input type="number" id="sleep" min="0" max="24" step="0.5" placeholder="Egzanp: 8">
+      <label for="energy">Nivo enèji ou</label>
+      <select id="energy">
+        <option>Ba</option>
+        <option>Mwayen</option>
+        <option>Bon</option>
+      </select>
+      <button class="primary" id="saveSleep">Sove byennèt mwen</button>
+    </div>
+    <div class="card">
+      <h2>🤰 Enfòmasyon sou gwosès</h2>
+      <p>Si w panse ou ka ansent, yon tès gwosès pipi ki vann nan famasi ka ede w verifye. Swiv enstriksyon tès la; si rezilta a negatif men règ la pa vini, repete tès la oswa pale ak yon pwofesyonèl lasante.</p>
+      <p class="muted">LUNÉA pa kapab detekte gwosès ni konfime li.</p>
+    </div>
+  </section>
+
+  <section id="history" class="tab">
+    <div class="card">
+      <h2>📖 Istwa mwen</h2>
+      <p class="muted">Se enfòmasyon ou te anrejistre sou aparèy sa a.</p>
+      <div id="historyList"></div>
+      <button class="secondary" id="exportData">Telechaje kopi done mwen</button>
+      <button class="secondary" id="deleteData" style="margin-top:10px">Efase tout done mwen</button>
+      <p class="muted">Telechaje kopi a pou konsève li. Efase done navigatè a oswa chanje telefòn ka fè enfòmasyon lokal yo disparèt.</p>
+    </div>
+  </section>
+</main>
+
+<footer>LUNÉA · Pran swen tèt ou avèk dousè 🌸</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const KEY = "lunea_wellness_v1";
+
+function loadData() {
+  try {
+    return JSON.parse(localStorage.getItem(KEY)) || {
+      cycle:{}, entries:[], journals:[], vitals:[], sleep:[]
+    };
+  } catch(e) {
+    return {cycle:{},entries:[],journals:[],vitals:[],sleep:[]};
+  }
+}
+let data = loadData();
+
+function saveData() {
+  localStorage.setItem(KEY, JSON.stringify(data));
+}
+
+function today() {
+  const d = new Date();
+  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+  return d.toISOString().slice(0,10);
+}
+
+["entryDate","readingDate","sleepDate"].forEach(id => $(id).value = today());
+
+document.querySelectorAll("nav button").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    button.classList.add("active");
+    $(button.dataset.tab).classList.add("active");
+    if (button.dataset.tab === "history") renderHistory();
+  });
+});
+
+function showTab(id) {
+  document.querySelectorAll("nav button").forEach(b =>
+    b.classList.toggle("active", b.dataset.tab === id));
+  document.querySelectorAll(".tab").forEach(t =>
+    t.classList.toggle("active", t.id === id));
+}
+
+function renderCycle() {
+  const c = data.cycle;
+  if (!c.last || !c.length) {
+    $("cycleSummary").innerHTML = "";
+    return;
+  }
+  const start = new Date(c.last + "T12:00:00");
+  const next = new Date(start);
+  next.setDate(next.getDate() + Number(c.length));
+  const diff = Math.round((new Date(today()+"T12:00:00")-start)/86400000);
+  const day = ((diff % Number(c.length)) + Number(c.length)) % Number(c.length) + 1;
+  $("cycleSummary").innerHTML =
+    `<div class="card"><p class="muted">Jou sik estime</p>
+    <div class="big">${day}</div>
+    <p>Dat pwochen règ estime: <strong>${next.toLocaleDateString()}</strong></p>
+    <p class="muted">Sa se yon estimasyon, se pa yon prediksyon medikal.</p></div>`;
+  $("lastPeriod").value = c.last;
+  $("cycleLength").value = c.length;
+}
+
+$("saveCycle").addEventListener("click", () => {
+  const last = $("lastPeriod").value;
+  const length = Number($("cycleLength").value);
+  if (!last || !length || length < 15 || length > 60) {
+    alert("Tanpri antre dat la ak yon longè sik ant 15 ak 60 jou.");
+    return;
+  }
+  data.cycle = {last, length};
+  saveData();
+  renderCycle();
+  alert("Enfòmasyon sik ou an sove. 💗");
+});
+
+$("saveJournal").addEventListener("click", () => {
+  data.journals.push({
+    date:today(), mood:$("mood").value, notes:$("notes").value.trim()
+  });
+  saveData();
+  $("notes").value = "";
+  alert("Jounal ou an sove. 💗");
+});
+
+$("saveSymptoms").addEventListener("click", () => {
+  const symptoms = [...document.querySelectorAll('input[name="symptom"]:checked')]
+    .map(x => x.value);
+  data.entries.push({
+    date:$("entryDate").value,
+    period:$("period").value,
+    symptoms,
+    flow:$("flow").value
+  });
+  saveData();
+  document.querySelectorAll('input[name="symptom"]').forEach(x => x.checked=false);
+  alert("Sentòm yo anrejistre. 🌸");
+});
+
+$("saveVitals").addEventListener("click", () => {
+  const sys = $("systolic").value;
+  const dia = $("diastolic").value;
+  const pulse = $("pulse").value;
+  if (!sys && !dia && !pulse) {
+    alert("Antre omwen yon mezi.");
+    return;
+  }
+  if ((sys && !dia) || (!sys && dia)) {
+    alert("Pou tansyon, antre toude valè yo.");
+    return;
+  }
+  data.vitals.push({
+    date:$("readingDate").value,
+    systolic:sys ? Number(sys) : null,
+    diastolic:dia ? Number(dia) : null,
+    pulse:pulse ? Number(pulse) : null
+  });
+  saveData();
+  ["systolic","diastolic","pulse"].forEach(id => $(id).value="");
+  alert("Mezi yo sove. Sa pa yon dyagnostik medikal.");
+});
+
+$("saveSleep").addEventListener("click", () => {
+  const hours = $("sleep").value;
+  if (hours === "" || Number(hours)<0 || Number(hours)>24) {
+    alert("Tanpri antre yon kantite èdtan ant 0 ak 24.");
+    return;
+  }
+  data.sleep.push({
+    date:$("sleepDate").value,
+    hours:Number(hours),
+    energy:$("energy").value
+  });
+  saveData();
+  $("sleep").value="";
+  alert("Enfòmasyon byennèt ou an sove. 🌷");
+});
+
+function renderHistory() {
+  const all = [];
+  data.entries.forEach(x => all.push({
+    date:x.date, title:"Sik règ", text:
+    "Règ: "+x.period+" · Sentòm: "+(x.symptoms.join(", ")||"Okenn")+
+    " · Kantite: "+x.flow
+  }));
+  data.journals.forEach(x => all.push({
+    date:x.date,title:"Jounal",text:"Atitid: "+x.mood+" · "+x.notes
+  }));
+  data.vitals.forEach(x => all.push({
+    date:x.date,title:"Mezi sante",text:
+    "Tansyon: "+(x.systolic ?? "—")+"/"+(x.diastolic ?? "—")+
+    " · Batman kè: "+(x.pulse ?? "—")
+  }));
+  data.sleep.forEach(x => all.push({
+    date:x.date,title:"Dòmi",text:x.hours+" èdtan · Enèji: "+x.energy
+  }));
+  all.sort((a,b)=>b.date.localeCompare(a.date));
+  $("historyList").innerHTML = all.length
+    ? all.map(x=>`<div class="entry"><strong>${x.title}</strong>
+      <div class="muted">${x.date}</div><p>${escapeHTML(x.text)}</p></div>`).join("")
+    : "<p>Ou poko gen okenn done anrejistre.</p>";
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
+}
+
+$("exportData").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href=url;
+  a.download="lunea-done-pesonel.json";
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+$("deleteData").addEventListener("click", () => {
+  if (confirm("Èske ou sèten ou vle efase tout done LUNÉA ki sou aparèy sa a?")) {
+    localStorage.removeItem(KEY);
+    data = {cycle:{},entries:[],journals:[],vitals:[],sleep:[]};
+    renderCycle();
+    renderHistory();
+    alert("Done lokal LUNÉA yo efase.");
+  }
+});
+
+renderCycle();
+</script>
+</body>
+</html>
